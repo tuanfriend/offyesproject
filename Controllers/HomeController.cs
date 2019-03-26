@@ -141,5 +141,10 @@ namespace offyesproj.Controllers
             return View("LoadQuestion");
         }
 
+        [HttpGet("ready")]
+        public IActionResult Ready()
+        {
+            return View("Ready");
+        }
     }
 }

@@ -11728,11 +11728,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\DOJO\\CSharp\\offyesproj\\offyesproj.csproj",
+      "projectUniqueName": "d:\\DOJO\\CSharp\\offyesproj\\offyesproj.csproj",
       "projectName": "offyesproj",
-      "projectPath": "D:\\DOJO\\CSharp\\offyesproj\\offyesproj.csproj",
+      "projectPath": "d:\\DOJO\\CSharp\\offyesproj\\offyesproj.csproj",
       "packagesPath": "C:\\Users\\Ricardo\\.nuget\\packages\\",
-      "outputPath": "D:\\DOJO\\CSharp\\offyesproj\\obj\\",
+      "outputPath": "d:\\DOJO\\CSharp\\offyesproj\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
