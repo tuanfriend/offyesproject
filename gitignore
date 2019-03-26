@@ -9,6 +9,8 @@
 *.sln.docstates
 
 # Build results
+bin/
+bin/*
 [Dd]ebug/
 [Rr]elease/
 x64/
@@ -191,6 +193,7 @@ $RECYCLE.BIN/
 # Visual Studio temp something
 .vs/
 .vscode/
+.vscode/*
 
 # dotnet stuff
 project.lock.json
