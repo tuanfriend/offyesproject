@@ -134,5 +134,11 @@ namespace offyesproj.Controllers
         {
             return View("CreateRoom");
         }
+
+        [HttpGet("ready")]
+        public IActionResult Ready()
+        {
+            return View("Ready");
+        }
     }
 }

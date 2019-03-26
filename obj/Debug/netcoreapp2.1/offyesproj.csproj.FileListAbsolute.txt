@@ -68,3 +68,4 @@ D:/DOJO/CSharp/offyesproj/obj/Debug/netcoreapp2.1/offyesproj.dll
 D:/DOJO/CSharp/offyesproj/obj/Debug/netcoreapp2.1/offyesproj.pdb
 D:/DOJO/CSharp/offyesproj/obj/Debug/netcoreapp2.1/offyesproj.csproj.CopyComplete
 /Users/danny/Documents/coding_dojo/c_sharp/personal/clone/offyesproject/obj/Debug/netcoreapp2.1/Razor/Views/Home/CreateRoom.g.cshtml.cs
+/Users/danny/Documents/coding_dojo/c_sharp/personal/clone/offyesproject/obj/Debug/netcoreapp2.1/Razor/Views/Home/Ready.g.cshtml.cs
