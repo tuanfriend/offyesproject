@@ -129,5 +129,10 @@ namespace offyesproj.Controllers
             return RedirectToAction("Index");
         }
         
+        [HttpGet("createroom")]
+        public IActionResult CreateRoom()
+        {
+            return View("CreateRoom");
+        }
     }
 }
