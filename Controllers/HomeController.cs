@@ -72,7 +72,7 @@ namespace offyesproj.Controllers
                 if (userInDb == null)
                 {
                     // Add an error to ModelState and return to View!
-                    ModelState.AddModelError("NickName", "Invalid Email/Password");
+                    ModelState.AddModelError("NickName", "Invalid Nick name/Password");
                     return View("Index");
                 }
 
