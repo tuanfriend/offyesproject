@@ -29,3 +29,5 @@ D:\DOJO\CSharp\offyesproj\obj\Debug\netcoreapp2.1\offyesproj.pdb
 D:\DOJO\CSharp\offyesproj\obj\Debug\netcoreapp2.1\offyesproj.csproj.CopyComplete
 D:\DOJO\CSharp\offyesproj\obj\Debug\netcoreapp2.1\Razor\Views\Home\Register.g.cshtml.cs
 D:\DOJO\CSharp\offyesproj\obj\Debug\netcoreapp2.1\Razor\Views\Home\EnterRoom.g.cshtml.cs
+D:\DOJO\CSharp\offyesproj\obj\Debug\netcoreapp2.1\Razor\Views\Home\Dashboard.g.cshtml.cs
+D:\DOJO\CSharp\offyesproj\obj\Debug\netcoreapp2.1\Razor\Views\Home\DisplayAnswer.g.cshtml.cs

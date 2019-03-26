@@ -31,8 +31,20 @@ namespace offyesproj.Controllers
             return View();
         }
 
+        [HttpGet("Dashboard")]
+        public IActionResult Dashboard()
+        {
+            return View();
+        }
+
         [HttpGet("enterroom")]
         public IActionResult EnterRoom()
+        {
+            return View();
+        }
+
+        [HttpGet("answers")]
+        public IActionResult DisplayAnswer()
         {
             return View();
         }
