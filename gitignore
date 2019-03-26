@@ -11,6 +11,14 @@
 # Build results
 bin/
 bin/*
+debug/
+debug/*
+Bin/
+Bin/*
+Debug/
+Debug/*
+obj/Debug
+obj/Debug/*
 [Dd]ebug/
 [Rr]elease/
 x64/
