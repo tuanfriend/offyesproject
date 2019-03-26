@@ -36,8 +36,7 @@ namespace offyesproj.Models
     public class LoginUser
     {
         // No other fields!
-        [Required(ErrorMessage = "Please enter correct Nick Name")]
-        [EmailAddress]
+        [Required(ErrorMessage = "Please enter correct Email")]
         public string LoginNickName { get; set; }
 
         [Required(ErrorMessage = "Please enter your password!")]
@@ -82,7 +81,6 @@ namespace offyesproj.Models
     {
         [Key]
         public int AnswerID {get; set;}
-
         public int QuestionID {get; set;}
         public string AnswerText {get; set;}
         public bool CorrectAnswer {get; set;} = false;

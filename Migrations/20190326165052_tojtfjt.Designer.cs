@@ -9,8 +9,8 @@ using offyesproj.Models;
 namespace offyesproj.Migrations
 {
     [DbContext(typeof(MyContext))]
-    [Migration("20190325173528_first")]
-    partial class first
+    [Migration("20190326165052_tojtfjt")]
+    partial class tojtfjt
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
