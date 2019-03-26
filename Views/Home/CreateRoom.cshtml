@@ -13,8 +13,8 @@
     @model Room
     <div id="createroom">
         <h2>Create a new Room</h2><br>
-        <form asp-action="Create_processing" asp-controller="Home" method="post">
-            <h4>Room Code:<br><input type="text" asp-for="RoomCode" class="input100"></h4><br>
+        <form asp-action="Bt_Create_New_Room" asp-controller="Home" method="post">
+            <h4>Room Code:<br><span asp-validation-for="RoomCode"></span><br><input type="text" asp-for="RoomCode" class="input100"></h4><br>
             <button id=button class="login100-form-btn">Create</button>
         </form>
     </div>

@@ -52,6 +52,8 @@ namespace offyesproj.Migrations
 
                     b.Property<int>("RoomID");
 
+                    b.Property<int>("Timer");
+
                     b.Property<DateTime>("Updated_at");
 
                     b.HasKey("QuestionID");
@@ -66,7 +68,8 @@ namespace offyesproj.Migrations
                     b.Property<int>("RoomID")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("RoomCode");
+                    b.Property<string>("RoomCode")
+                        .IsRequired();
 
                     b.HasKey("RoomID");
 

@@ -115,8 +115,23 @@ namespace offyesproj.Controllers
             return View();
         }
 
-        [HttpGet("addquestion")]
-        public IActionResult AddQuestion()
+        [HttpGet("addquestion/{id}")]
+        public IActionResult AddQuestion(int id)
+        {
+            ViewBag.RoomID = id;
+            return View();
+        }
+
+        [HttpPost("btAddquestion")]
+        public IActionResult Bt_Add_Questions(Question newQue)
+        {
+                dbContext.Add(newQue);
+                dbContext.SaveChanges();
+                return RedirectToAction("AddQuestion", new { id = newQue.RoomID });
+        }
+
+        [HttpGet("addanswers")]
+        public IActionResult AddAnswer()
         {
             return View();
         }
@@ -145,6 +160,29 @@ namespace offyesproj.Controllers
         public IActionResult Ready()
         {
             return View("Ready");
+        }
+
+        [HttpPost("Bt_Create_New_Room")]
+        public IActionResult Bt_Create_New_Room(Room newRoom)
+        {
+            if (ModelState.IsValid)
+            {
+                if (dbContext.Rooms.Any(u => u.RoomCode == newRoom.RoomCode))
+                {
+                    // Manually add a ModelState error to the Room field, with provided
+                    // error message
+                    ModelState.AddModelError("RoomCode", "Room Code already in use!");
+                    // You may consider returning to the View at this point
+                    return View("CreateRoom");
+                }
+                dbContext.Add(newRoom);
+                dbContext.SaveChanges();
+                return RedirectToAction("AddQuestion", new { id = newRoom.RoomID });
+            }
+            else
+            {
+                return View("CreateRoom");
+            }
         }
     }
 }

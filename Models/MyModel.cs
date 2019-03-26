@@ -48,8 +48,10 @@ namespace offyesproj.Models
     {
         [Key]
         public int RoomID { get; set; }
-        public string RoomCode {get; set;}
 
+        [Required]
+        [MinLength(5, ErrorMessage = "Room code has to be atleast 5 characters!")]
+        public string RoomCode {get; set;}
         public List<UserRoom> ListOfUsers { get; set; }
         public List<Question> ListOfQuestions { get; set; }
     }
@@ -71,7 +73,8 @@ namespace offyesproj.Models
 
         public int RoomID { get; set; }
         public string QuestionText {get; set;}
-        public int Point {get; set;} = 1;
+        public int Point {get; set;} = 0;
+        public int Timer {get; set;}
         public DateTime Created_at { get; set; } = DateTime.Now;
         public DateTime Updated_at { get; set; } = DateTime.Now;
         public List<Answer> ListOfAnswers { get; set; }

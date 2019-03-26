@@ -1,25 +1,40 @@
+@model Answer
+
 <head>
     <link rel="stylesheet" type="text/css" href="~/css/dash.css">
 </head>
 
-@model Question
 <div class="limiter">
 
     <div class="container-login100">
 
-        <form asp-action="Bt_Add_Questions" asp-controller="Home" method="post">
+    <form asp-action="Bt_Add_Questions" asp-controller="Home" method="post">
   
-    <div class="form-group">
-    <label for="inputAddress">Question</label>
-    <input asp-for="QuestionText" type="text" class="form-control" id="inputAddress" placeholder="Add question here...">
-  </div>
-<input type="hidden" asp-for="RoomID" value="@ViewBag.RoomID">
+    <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="inputEmail4">answer 1</label>
+      <input type="text" class="form-control" id="inputEmail4" placeholder="Answer 1">
+      <input type="checkbox" name="vehicle1" value="Bike"> Correct<br>
+    </div>
 
-<select class="form-control" asp-for="Timer">
-  <option value="10">10 seconds</option>
-  <option value="15">15 seconds</option>
-  <option value="20">20 seconds</option>
-</select>
+    <div class="form-group col-md-6">
+      <label for="inputEmail4">answer 1</label>
+      <input type="text" class="form-control" id="inputEmail4" placeholder="Answer 1">
+      <input type="checkbox" name="vehicle1" value="Bike"> Correct<br>
+    </div>
+
+    <div class="form-group col-md-6">
+      <label for="inputEmail4">answer 1</label>
+      <input type="text" class="form-control" id="inputEmail4" placeholder="Answer 1">
+      <input type="checkbox" name="vehicle1" value="Bike"> Correct<br>
+    </div>
+
+    <div class="form-group col-md-6">
+      <label for="inputEmail4">answer 1</label>
+      <input type="text" class="form-control" id="inputEmail4" placeholder="Answer 1">
+      <input type="checkbox" name="vehicle1" value="Bike"> Correct<br>
+    </div>
+</div>
 <br>
   <button type="submit" class="btn btn-primary">Add More Question</button>
   <a href="/aa"><button class="btn btn-primary ">Add Answer</button></a>
