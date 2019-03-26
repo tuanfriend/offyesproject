@@ -63,12 +63,12 @@ using offyesproj.Models;
             WriteLiteral("    <div id=\"createroom\">\r\n        <h2>Create a new Room</h2><br>\r\n        ");
             EndContext();
             BeginContext(326, 259, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "7fea0dbe9e014f1396e8c8d00b179724", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "a2381d3ce8764ccf96b3a042ef2c441d", async() => {
                 BeginContext(399, 32, true);
                 WriteLiteral("\r\n            <h4>Room Code:<br>");
                 EndContext();
                 BeginContext(431, 55, false);
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("input", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "c5c2e2cf38cd4c7c99ed6347a93c06fc", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("input", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "ea61cbd3f528415a97aebd8efdb979af", async() => {
                 }
                 );
                 __Microsoft_AspNetCore_Mvc_TagHelpers_InputTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.TagHelpers.InputTagHelper>();

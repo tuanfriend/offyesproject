@@ -67,3 +67,4 @@ D:\DOJO\CSharp\offyesproj\obj\Debug\netcoreapp2.1\offyesproj.Views.pdb
 D:\DOJO\CSharp\offyesproj\obj\Debug\netcoreapp2.1\offyesproj.dll
 D:\DOJO\CSharp\offyesproj\obj\Debug\netcoreapp2.1\offyesproj.pdb
 D:\DOJO\CSharp\offyesproj\obj\Debug\netcoreapp2.1\offyesproj.csproj.CopyComplete
+D:\DOJO\CSharp\offyesproj\obj\Debug\netcoreapp2.1\Razor\Views\Home\LoadQuestion.g.cshtml.cs
