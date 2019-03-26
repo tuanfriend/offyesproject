@@ -1,1 +1,20 @@
-<h1>Create a New Room</h1>
+<style>
+    #createroom{
+    background-color: white;
+    border-radius:10px;
+    }
+    #roomcode{
+        margin-left: 57px;
+    }
+</style>
+<div class="container-login100">
+    @model Room
+    <div id="createroom">
+        <h2>Create a new Room</h2><br>
+        <form asp-action="Create_processing" asp-controller="Home" method="post">
+            <h4>Room Code:<br><input type="text" asp-for="RoomCode" class="input100"></h4><br>
+            <button id=button class="login100-form-btn">Create</button>
+        </form>
+    </div>
+
+</div>

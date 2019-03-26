@@ -66,3 +66,4 @@ D:/DOJO/CSharp/offyesproj/obj/Debug/netcoreapp2.1/Razor/Views/Home/AddQuestion.g
 /Users/danny/Documents/coding_dojo/c_sharp/personal/clone/offyesproject/obj/Debug/netcoreapp2.1/offyesproj.dll
 /Users/danny/Documents/coding_dojo/c_sharp/personal/clone/offyesproject/obj/Debug/netcoreapp2.1/offyesproj.pdb
 /Users/danny/Documents/coding_dojo/c_sharp/personal/clone/offyesproject/obj/Debug/netcoreapp2.1/offyesproj.csproj.CopyComplete
+/Users/danny/Documents/coding_dojo/c_sharp/personal/clone/offyesproject/obj/Debug/netcoreapp2.1/Razor/Views/Home/CreateRoom.g.cshtml.cs
