@@ -103,10 +103,12 @@ namespace offyesproj.Controllers
             return View();
         }
 
-        [HttpGet("enterroom")]
-        public IActionResult EnterRoom()
+        [Route("logout")]
+        [HttpGet]
+        public IActionResult Logout()
         {
-            return View();
+            HttpContext.Session.Clear();
+            return RedirectToAction("Index");
         }
 
         [HttpGet("answers")]
@@ -125,41 +127,133 @@ namespace offyesproj.Controllers
         [HttpPost("btAddquestion")]
         public IActionResult Bt_Add_Questions(Question newQue)
         {
-                dbContext.Add(newQue);
-                dbContext.SaveChanges();
-                return RedirectToAction("AddQuestion", new { id = newQue.RoomID });
+            dbContext.Add(newQue);
+            dbContext.SaveChanges();
+            return RedirectToAction("AddAnswer", new { Queid = newQue.QuestionID });
         }
 
-        [HttpGet("addanswers")]
-        public IActionResult AddAnswer()
+        [HttpGet("addanswers/{Queid}")]
+        public IActionResult AddAnswer(int Queid)
         {
+            Question newque = dbContext.Questions.SingleOrDefault(u => u.QuestionID == Queid);
+            ViewBag.QueName = newque.QuestionText;
+            ViewBag.QueID = newque.QuestionID;
+            HttpContext.Session.SetInt32("QuestionID", newque.QuestionID);
             return View();
         }
 
-        [Route("logout")]
-        [HttpGet]
-        public IActionResult Logout()
+        [HttpPost("btAddAnswer")]
+        public IActionResult Bt_Add_Answers()
         {
-            HttpContext.Session.Clear();
-            return RedirectToAction("Index");
+
+            Answer answer1 = new Answer();
+            answer1.QuestionID = (int)HttpContext.Session.GetInt32("QuestionID");
+            answer1.AnswerText = Request.Form["answer1"];
+            if (Request.Form["ckanswer1"] == "true")
+            {
+                answer1.CorrectAnswer = true;
+            }
+            else
+            {
+                answer1.CorrectAnswer = false;
+            }
+
+            dbContext.Add(answer1);
+            dbContext.SaveChanges();
+
+            Answer answer2 = new Answer();
+            answer2.QuestionID = (int)HttpContext.Session.GetInt32("QuestionID");
+            answer2.AnswerText = Request.Form["answer2"];
+            if (Request.Form["ckanswer2"] == "true")
+            {
+                answer2.CorrectAnswer = true;
+                Console.WriteLine(answer2.CorrectAnswer);
+            }
+            else
+            {
+                answer2.CorrectAnswer = false;
+            }
+            dbContext.Add(answer2);
+            dbContext.SaveChanges();
+
+            Answer answer3 = new Answer();
+            answer3.QuestionID = (int)HttpContext.Session.GetInt32("QuestionID");
+            answer3.AnswerText = Request.Form["answer3"];
+            if (Request.Form["ckanswer3"] == "true")
+            {
+                answer3.CorrectAnswer = true;
+            }
+            else
+            {
+                answer3.CorrectAnswer = false;
+            }
+
+            dbContext.Add(answer3);
+            dbContext.SaveChanges();
+
+            Answer answer4 = new Answer();
+            answer4.QuestionID = (int)HttpContext.Session.GetInt32("QuestionID");
+            answer4.AnswerText = Request.Form["answer4"];
+            if (Request.Form["ckanswer4"] == "true")
+            {
+                answer4.CorrectAnswer = true;
+            }
+            else
+            {
+                answer4.CorrectAnswer = false;
+            }
+            dbContext.Add(answer4);
+            dbContext.SaveChanges();
+
+            return RedirectToAction("ReviewQuestion");
+
         }
-        
+
+        [HttpGet("reviewquestion")]
+        public IActionResult ReviewQuestion()
+        {
+            ViewBag.RoomID = HttpContext.Session.GetInt32("RoomID");
+
+            List<Question> listquestion = dbContext.Questions
+            .Where(u => u.RoomID == HttpContext.Session.GetInt32("RoomID"))
+            .Include(an => an.ListOfAnswers)
+            .ToList();
+
+            ViewBag.listquestion = listquestion;
+            return View("ReviewQuestion");
+        }
+
         [HttpGet("createroom")]
         public IActionResult CreateRoom()
         {
             return View("CreateRoom");
         }
 
-        [HttpGet("loadquestion")]
-        public IActionResult LoadQuestion()
+        [HttpGet("ready/{roomid}")]
+        public IActionResult Ready(int roomid)
         {
-            return View("LoadQuestion");
+            Room roomworking = dbContext.Rooms.SingleOrDefault(u => u.RoomID == roomid);
+            ViewBag.RoomCode = roomworking.RoomCode;
+            ViewBag.RoomID = roomid;
+            return View("Ready");
         }
 
-        [HttpGet("ready")]
-        public IActionResult Ready()
+        [HttpGet("loadquestion/{roomid}")]
+        public IActionResult LoadQuestion(int roomid)
         {
-            return View("Ready");
+            Room currentroom = dbContext.Rooms
+            .Include(q => q.ListOfUsers)
+            .ThenInclude(u => u.User)
+            .FirstOrDefault(r => r.RoomID == roomid);
+
+            List<Question> listquestionInRoom = dbContext.Questions
+            .Where(u => u.RoomID == roomid)
+            .Include(an => an.ListOfAnswers)
+            .ToList();
+
+            ViewBag.listquestionInRoom = listquestionInRoom;
+
+            return View("LoadQuestion");
         }
 
         [HttpPost("Bt_Create_New_Room")]
@@ -177,12 +271,49 @@ namespace offyesproj.Controllers
                 }
                 dbContext.Add(newRoom);
                 dbContext.SaveChanges();
+                HttpContext.Session.SetInt32("RoomID", newRoom.RoomID);
                 return RedirectToAction("AddQuestion", new { id = newRoom.RoomID });
             }
             else
             {
                 return View("CreateRoom");
             }
+        }
+
+        //Enter passcode for enter room for user
+        [HttpGet("enterroom")]
+        public IActionResult EnterRoom()
+        {
+            return View();
+        }
+
+        [HttpPost("btEnterRoom")]
+        public IActionResult btEnterRoom()
+        {
+            //If check correct passcode or no here
+            Room roomworking = dbContext.Rooms.SingleOrDefault(u => u.RoomCode == Request.Form["RoomCode"]);
+            if (roomworking == null)
+            {
+                return View();
+            }
+            else
+            {
+                UserRoom userandroom = new UserRoom();
+                userandroom.UserID = (int)HttpContext.Session.GetInt32("UserID");
+                userandroom.RoomID = roomworking.RoomID;
+                userandroom.Score = 0;
+                userandroom.AnswerSheet = "okay";
+                dbContext.Add(userandroom);
+                dbContext.SaveChanges();
+                return RedirectToAction("UserReady", new{userid = userandroom.UserID });
+            }
+
+        }
+
+        [HttpGet("userready/{userid}")]
+        public IActionResult UserReady(int userid)
+        {
+            return View();
         }
     }
 }

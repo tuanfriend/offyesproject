@@ -60,6 +60,8 @@ namespace offyesproj.Models
     {
         [Key]
         public int UserRoomID { get; set; }
+        public int RoomID { get; set; }
+        public int UserID { get; set; }
         public User User { get; set; }
         public Room Room { get; set; }
         public int Score {get; set;}
@@ -73,7 +75,7 @@ namespace offyesproj.Models
 
         public int RoomID { get; set; }
         public string QuestionText {get; set;}
-        public int Point {get; set;} = 0;
+        public int Point {get; set;} = 1;
         public int Timer {get; set;}
         public DateTime Created_at { get; set; } = DateTime.Now;
         public DateTime Updated_at { get; set; } = DateTime.Now;
