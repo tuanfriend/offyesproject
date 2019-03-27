@@ -294,7 +294,7 @@ namespace offyesproj.Controllers
             Room roomworking = dbContext.Rooms.SingleOrDefault(u => u.RoomCode == Request.Form["RoomCode"]);
             if (roomworking == null)
             {
-                return View();
+                return View("EnterRoom");
             }
             else
             {
