@@ -18,11 +18,26 @@
     }
 </style>
 <div class="container-login100">
-    <a href="/aa"><button class="btn btn-primary rightbt">Next</button></a>
+    
+        <form asp-action="LoadNextQuestion" method="post" asp-controller="Home">
+            <input type="hidden" name="currentquestionID" value="@ViewBag.question.QuestionID">
+            <input type="hidden" name="roomID" value="@ViewBag.RoomID">
+            <button type="submit" class="btn btn-primary rightbt">Next</button>
+        </form>
     <div id="createroom">
-        <h2>Time Count Down: 20</h2><br>
-        <h4>Brownie caramels tart caramels wafer croissant chupa chups apple pie. Tart caramels cake gummies liquorice liquorice lemon drops</h4>
+        <h2>Time Count Down: <span id="countdowntimer">@ViewBag.question.Timer </span></h2><br>
+        <h4>@ViewBag.question.QuestionText</h4>
 
     </div>
 
 </div>
+
+<script type="text/javascript">
+    var timeleft = @ViewBag.question.Timer;
+    var downloadTimer = setInterval(function(){
+    timeleft--;
+    document.getElementById("countdowntimer").textContent = timeleft;
+    if(timeleft <= 0)
+        clearInterval(downloadTimer);
+    },1000);
+</script>

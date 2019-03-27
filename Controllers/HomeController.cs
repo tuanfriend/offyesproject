@@ -232,28 +232,75 @@ namespace offyesproj.Controllers
         [HttpGet("ready/{roomid}")]
         public IActionResult Ready(int roomid)
         {
+            ViewBag.listOfQuestions = dbContext.Questions.Where(qu => qu.RoomID == roomid).ToList();
+            
+            
             Room roomworking = dbContext.Rooms.SingleOrDefault(u => u.RoomID == roomid);
             ViewBag.RoomCode = roomworking.RoomCode;
             ViewBag.RoomID = roomid;
-            return View("Ready");
+
+            ViewBag.num = ViewBag.listOfQuestions[0].QuestionID;
+            //return View("LoadQuestion", new{ roomid = roomid, questionid = ViewBag.num});
+            // int num = 0;
+            // num++;
+            // int questid = ViewBag.listOfQuestions[num].QuestionID;
+            // if(questid == null){
+            //     return RedirectToAction("index");
+            // }else{
+            //     return View("Ready", new { roomid = roomid, qid = questid });
+            // }
+            return View();
         }
 
-        [HttpGet("loadquestion/{roomid}")]
-        public IActionResult LoadQuestion(int roomid)
+        [HttpGet("loadquestion/{roomid}/{questionid}")]
+        public IActionResult LoadQuestion(int roomid, int questionid)
         {
-            Room currentroom = dbContext.Rooms
-            .Include(q => q.ListOfUsers)
-            .ThenInclude(u => u.User)
-            .FirstOrDefault(r => r.RoomID == roomid);
+            ViewBag.question = dbContext.Questions.FirstOrDefault(a => a.QuestionID == questionid);
 
-            List<Question> listquestionInRoom = dbContext.Questions
-            .Where(u => u.RoomID == roomid)
-            .Include(an => an.ListOfAnswers)
-            .ToList();
+            //ViewBag.listOfQuestions = dbContext.Questions.Where(qu => qu.RoomID == roomid).ToList();
+            //int questid = questionid; //13
+           // questid ++;
+            //int? nextquestid = ViewBag.listOfQuestions[questid].QuestionID;
+           // if(nextquestid == null){
+            //    return RedirectToAction("ResultPage");
+            //}else{
+           //     return RedirectToAction("LoadQuestion", {new = })
+           // }
+          //  ViewBag.questionnext = dbContext.Questions.FirstOrDefault(a => a.QuestionID == questid);
+            
+            // Room currentroom = dbContext.Rooms
+            // .Include(q => q.ListOfUsers)
+            // .ThenInclude(u => u.User)
+            // .FirstOrDefault(r => r.RoomID == roomid);
 
-            ViewBag.listquestionInRoom = listquestionInRoom;
+            // List<Question> listquestionInRoom = dbContext.Questions
+            // .Where(u => u.RoomID == roomid)
+            // .Include(an => an.ListOfAnswers)
+            // .ToList();
+            // ViewBag.listquestionInRoom = listquestionInRoom;
+
+            ViewBag.RoomID = roomid;
 
             return View("LoadQuestion");
+        }
+
+        [HttpPost("loadnextquestion")]
+        public IActionResult LoadNextQuestion()
+        {
+            int currentquestionID = Int32.Parse(Request.Form["currentquestionID"]);
+            currentquestionID++;
+            int currentroomID = Int32.Parse(Request.Form["roomID"]);
+
+            ViewBag.listOfQuestions = dbContext.Questions.Where(qu => qu.RoomID == currentroomID).ToList();
+            
+            Question checkquestion = dbContext.Questions
+            .Where(qu => qu.RoomID == currentroomID)
+            .FirstOrDefault(ts => ts.QuestionID == currentquestionID);
+            if(checkquestion == null){
+                return View("ResultPage");
+            }else{
+                return RedirectToAction("LoadQuestion", new {roomid = currentroomID, questionid = currentquestionID});
+            }
         }
 
         [HttpPost("Bt_Create_New_Room")]
