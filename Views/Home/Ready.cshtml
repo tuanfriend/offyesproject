@@ -31,8 +31,8 @@
         <h1> Is Everyone Ready to Play?</h1>
         <img src="~/images/ohitson.gif" alt="IMG">
         <h3>Room Code: </h3>
-        <h3 class="code">RoomCodeHere</h3>
-        <button class="login100-form-btn">Go ! ! !</button>
+        <h3 class="code">@ViewBag.RoomCode</h3>
+        <a href="/loadquestion/@ViewBag.RoomID"><button class="login100-form-btn">Play Now ...Go ! ! !</button></a>
     </div>
 </div>
 
