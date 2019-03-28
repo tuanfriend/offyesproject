@@ -287,6 +287,40 @@ namespace offyesproj.Controllers
             return View();
         }
 
+        [HttpGet("result/{roomid}")]
+        public IActionResult ResultPage(int roomid)
+        {
+            // List<Room> Userplay = dbContext.Rooms
+            
+            // .Include(us => us.ListOfUsers)
+            // .ThenInclude(x => x.User)
+            // .Where(ro => ro.RoomID == roomid)
+            // .OrderBy(sc => sc.)
+            // .ThenBy(ti => ti.User.TotalTimeAnswer)
+            // .ToList();
+
+            // List<UserRoom> ListPlayer1 = dbContext.UserRooms
+            // .Where(r => r.RoomID == roomid)
+            // .Include(x => x.User)
+            // .ThenInclude(u => u.NickName)
+            // .OrderByDescending(k => k.TotalScore)
+            // .ThenBy(l => l.TotalTimeAnswer)
+            // .ToList();
+
+            // foreach(var l in ListPlayer1){
+            //     l.
+            // }
+            var players = dbContext.Rooms
+               .Include(w => w.ListOfUsers)
+               .ThenInclude(u => u.User)
+               .FirstOrDefault(w => w.RoomID == roomid);
+            
+            ViewBag.Userplay = players.ListOfUsers.OrderByDescending(s => s.TotalScore).ThenBy(k => k.TotalTimeAnswer);
+            ViewBag.RoomID = roomid;
+
+            return View("ResultPage");
+        }
+
         [HttpPost("Bt_Create_New_Room")]
         public IActionResult Bt_Create_New_Room(Room newRoom)
         {
@@ -332,8 +366,8 @@ namespace offyesproj.Controllers
                 UserRoom userandroom = new UserRoom();
                 userandroom.UserID = (int)HttpContext.Session.GetInt32("UserID");
                 userandroom.RoomID = roomworking.RoomID;
-                userandroom.Score = 0;
-                userandroom.AnswerSheet = "okay";
+                userandroom.TotalScore = 0;
+                userandroom.TotalTimeAnswer = 0;
                 dbContext.Add(userandroom);
                 dbContext.SaveChanges();
                 HttpContext.Session.SetInt32("PlayerRoomID", userandroom.RoomID);
@@ -382,13 +416,6 @@ namespace offyesproj.Controllers
             
             return View();
         }
-        
-        [HttpGet("resultpage")]
-        public IActionResult ResultPage()
-        {
-            return View("ResultPage");
-        }
-
 
         [HttpGet("BtAnswer/{ansid}/{roomid}/{quesid}")]
         public IActionResult BtAnswer(int ansid, int roomid, int quesid)
@@ -445,7 +472,12 @@ namespace offyesproj.Controllers
             // .Include(q => q.ListOfUsers)
             // .ThenInclude(u => u.User)
             // .FirstOrDefault(r => r.RoomID == roomid);
-            User currentPlayer = dbContext.Users
+
+            // User currentPlayer = dbContext.Users
+            // .FirstOrDefault(qc => qc.UserID == (int)HttpContext.Session.GetInt32("UserID"));
+
+            UserRoom currentPlayer = dbContext.UserRooms
+            .Where(o => o.RoomID == roomid)
             .FirstOrDefault(qc => qc.UserID == (int)HttpContext.Session.GetInt32("UserID"));
 
             currentPlayer.TotalScore = (int)HttpContext.Session.GetInt32("PlayerScore");
@@ -459,9 +491,50 @@ namespace offyesproj.Controllers
             Console.WriteLine("////////total Time answer after in databse/////////////");
             Console.WriteLine(currentPlayer.TotalTimeAnswer);
 
+
             return View();
         }
 
+        [HttpGet("endgame/{roomid}")]
+        public IActionResult EndGame(int roomid)
+        {
+            var ListPlayer = dbContext.Rooms
+            .Include(us => us.ListOfUsers)
+            .ThenInclude(x => x.User)
+            .FirstOrDefault(bc => bc.RoomID == roomid);
 
+            // List<Room> Userplay = dbContext.Rooms
+            // .Include(us => us.ListOfUsers)
+            // .ThenInclude(x => x.User)
+            // .Where(ro => ro.RoomID == roomid)
+            // .OrderBy(sc => sc.)
+            // .ThenBy(ti => ti.User.TotalTimeAnswer)
+            // .ToList();
+
+            // List<UserRoom> listuser = dbContext.UserRooms
+            // .Where(ro => ro.RoomID == roomid)
+            // .Include(o => o.User)
+            // .ToList()
+            // .ForEach(j => j.TotalScore = 0);
+            // foreach(var i in listuser){
+            //     i.User.TotalScore = 0;
+            //     i.User.TotalTimeAnswer = 0;
+            // }
+            ////////////////////////////////////////////////////////////
+
+            // List<UserRoom> ListPlayer1 = dbContext.UserRooms
+            // .Where(r => r.RoomID == roomid)
+            // .Include(x => x.User)
+            // .ToList();
+
+            // foreach(UserRoom i in ListPlayer1)
+            // {
+            //     i.TotalScore = 0;
+            //     i.TotalTimeAnswer = 0;
+            // }
+
+            // dbContext.SaveChanges();
+            return View();
+        }
     }
 }
