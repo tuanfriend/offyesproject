@@ -26,6 +26,9 @@ namespace offyesproj.Models
         public DateTime Created_at { get; set; } = DateTime.Now;
         public DateTime Updated_at { get; set; } = DateTime.Now;
 
+        public int TotalScore {get; set;} = 0;
+        public int TotalTimeAnswer {get; set;} = 0;
+
         [NotMapped]
         [Compare("Password")]
         [DataType(DataType.Password)]

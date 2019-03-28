@@ -270,12 +270,19 @@ namespace offyesproj.Controllers
             .FirstOrDefault(ts => ts.QuestionID == currentquestionID);
             if (checkquestion == null)
             {
-                return View("ResultPage");
+                return RedirectToAction("HostGameOver", new { roomid = currentroomID });
             }
             else
             {
                 return RedirectToAction("LoadQuestion", new { roomid = currentroomID, questionid = currentquestionID });
             }
+        }
+
+        [HttpGet("hostgameover/{roomid}")]
+        public IActionResult HostGameOver(int roomid)
+        {
+            ViewBag.RoomID = roomid;
+            return View();
         }
 
         [HttpPost("Bt_Create_New_Room")]
@@ -345,6 +352,7 @@ namespace offyesproj.Controllers
             ViewBag.num = listquestionInRoom[0].QuestionID;
             ViewBag.PlayerRoomID = HttpContext.Session.GetInt32("PlayerRoomID");
             HttpContext.Session.SetInt32("PlayerScore", 0);
+            HttpContext.Session.SetInt32("PlayerTimeAnswer", 0);
 
             return View();
         }
@@ -386,20 +394,25 @@ namespace offyesproj.Controllers
                 int getpoint = (int)HttpContext.Session.GetInt32("PlayerScore");
                 getpoint++;
                 HttpContext.Session.SetInt32("PlayerScore", getpoint);
-                Console.WriteLine("//////////////////////////////update point");
-                Console.WriteLine(HttpContext.Session.GetInt32("PlayerScore"));
+
+                int gettimeanswer = (int)HttpContext.Session.GetInt32("PlayerTimeAnswer");
+                int secondanswer = Int32.Parse(DateTime.Now.ToString("ss"));
+                gettimeanswer = gettimeanswer + secondanswer;
+                HttpContext.Session.SetInt32("PlayerTimeAnswer", gettimeanswer);
+
+                Console.WriteLine("//////////////////////////////update timeanserr");
+                Console.WriteLine(HttpContext.Session.GetInt32("PlayerTimeAnswer"));
                 Question checkquestion = dbContext.Questions
             .Where(qu => qu.RoomID == roomid)
             .FirstOrDefault(ts => ts.QuestionID == currentquesid);
                 if (checkquestion == null)
                 {
-                    return View("DoneGame");
+                    return RedirectToAction("PlayerGameOver", new {roomid = roomid});
                 }
                 else
                 {
                     return RedirectToAction("DisplayAnswer", new { roomid = roomid, quesid = currentquesid });
                 }
-
             }
             else
             {
@@ -408,7 +421,7 @@ namespace offyesproj.Controllers
             .FirstOrDefault(ts => ts.QuestionID == currentquesid);
                 if (checkquestion == null)
                 {
-                    return View("DoneGame");
+                    return RedirectToAction("PlayerGameOver", new {roomid = roomid});
                 }else{
                     return RedirectToAction("DisplayAnswer", new { roomid = roomid, quesid = currentquesid });
                 }
@@ -416,6 +429,29 @@ namespace offyesproj.Controllers
             }
         }
 
+        [HttpGet("playergameover/{roomid}")]
+        public IActionResult PlayerGameOver(int roomid)
+        {
+            // Room currentroom = dbContext.Rooms
+            // .Include(q => q.ListOfUsers)
+            // .ThenInclude(u => u.User)
+            // .FirstOrDefault(r => r.RoomID == roomid);
+            User currentPlayer = dbContext.Users
+            .FirstOrDefault(qc => qc.UserID == (int)HttpContext.Session.GetInt32("UserID"));
+
+            currentPlayer.TotalScore = (int)HttpContext.Session.GetInt32("PlayerScore");
+            Console.WriteLine("////////total point/////////////");
+            Console.WriteLine(HttpContext.Session.GetInt32("PlayerScore"));
+            currentPlayer.TotalTimeAnswer = (int)HttpContext.Session.GetInt32("PlayerTimeAnswer");
+            Console.WriteLine("////////total Time answer/////////////");
+            Console.WriteLine(HttpContext.Session.GetInt32("PlayerTimeAnswer"));
+            dbContext.SaveChanges();
+
+            Console.WriteLine("////////total Time answer after in databse/////////////");
+            Console.WriteLine(currentPlayer.TotalTimeAnswer);
+
+            return View();
+        }
 
     }
 }
