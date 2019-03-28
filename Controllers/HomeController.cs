@@ -24,6 +24,7 @@ namespace offyesproj.Controllers
         [HttpGet("")]
         public IActionResult Index()
         {
+            HttpContext.Session.Clear();
             return View();
         }
 
@@ -100,7 +101,14 @@ namespace offyesproj.Controllers
         [HttpGet("Dashboard")]
         public IActionResult Dashboard()
         {
-            return View();
+            if (HttpContext.Session.GetString("Session") == null)
+            {
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                return View();
+            }
         }
 
         [Route("logout")]
@@ -114,8 +122,16 @@ namespace offyesproj.Controllers
         [HttpGet("addquestion/{id}")]
         public IActionResult AddQuestion(int id)
         {
-            ViewBag.RoomID = id;
-            return View();
+            if (HttpContext.Session.GetString("Session") == null)
+            {
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                ViewBag.RoomID = id;
+                return View();
+            }
+
         }
 
         [HttpPost("btAddquestion")]
@@ -129,11 +145,19 @@ namespace offyesproj.Controllers
         [HttpGet("addanswers/{Queid}")]
         public IActionResult AddAnswer(int Queid)
         {
-            Question newque = dbContext.Questions.SingleOrDefault(u => u.QuestionID == Queid);
-            ViewBag.QueName = newque.QuestionText;
-            ViewBag.QueID = newque.QuestionID;
-            HttpContext.Session.SetInt32("QuestionID", newque.QuestionID);
-            return View();
+            if (HttpContext.Session.GetString("Session") == null)
+            {
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                Question newque = dbContext.Questions.SingleOrDefault(u => u.QuestionID == Queid);
+                ViewBag.QueName = newque.QuestionText;
+                ViewBag.QueID = newque.QuestionID;
+                HttpContext.Session.SetInt32("QuestionID", newque.QuestionID);
+                return View();
+            }
+
         }
 
         [HttpPost("btAddAnswer")]
@@ -206,21 +230,37 @@ namespace offyesproj.Controllers
         [HttpGet("reviewquestion")]
         public IActionResult ReviewQuestion()
         {
-            ViewBag.RoomID = HttpContext.Session.GetInt32("RoomID");
+            if (HttpContext.Session.GetString("Session") == null)
+            {
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                ViewBag.RoomID = HttpContext.Session.GetInt32("RoomID");
 
-            List<Question> listquestion = dbContext.Questions
-            .Where(u => u.RoomID == HttpContext.Session.GetInt32("RoomID"))
-            .Include(an => an.ListOfAnswers)
-            .ToList();
+                List<Question> listquestion = dbContext.Questions
+                .Where(u => u.RoomID == HttpContext.Session.GetInt32("RoomID"))
+                .Include(an => an.ListOfAnswers)
+                .ToList();
 
-            ViewBag.listquestion = listquestion;
-            return View("ReviewQuestion");
+                ViewBag.listquestion = listquestion;
+                return View("ReviewQuestion");
+            }
+
         }
 
         [HttpGet("createroom")]
         public IActionResult CreateRoom()
         {
-            return View("CreateRoom");
+            if (HttpContext.Session.GetString("Session") == null)
+            {
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                return View("CreateRoom");
+            }
+
         }
 
         [HttpGet("ready/{roomid}")]
@@ -238,7 +278,20 @@ namespace offyesproj.Controllers
         [HttpGet("loadquestion/{roomid}/{questionid}")]
         public IActionResult LoadQuestion(int roomid, int questionid)
         {
-            ViewBag.question = dbContext.Questions.FirstOrDefault(a => a.QuestionID == questionid);
+            var thisquestion = dbContext.Questions.FirstOrDefault(a => a.QuestionID == questionid);
+            ViewBag.question = thisquestion;
+            if (thisquestion.Timer == 10)
+            {
+                ViewBag.timer = "/music/10.mp3";
+            }
+            if (thisquestion.Timer == 15)
+            {
+                ViewBag.timer = "/music/15.mp3";
+            }
+            if (thisquestion.Timer == 20)
+            {
+                ViewBag.timer = "/music/20.mp3";
+            }
 
             // Room currentroom = dbContext.Rooms
             // .Include(q => q.ListOfUsers)
@@ -291,7 +344,7 @@ namespace offyesproj.Controllers
         public IActionResult ResultPage(int roomid)
         {
             // List<Room> Userplay = dbContext.Rooms
-            
+
             // .Include(us => us.ListOfUsers)
             // .ThenInclude(x => x.User)
             // .Where(ro => ro.RoomID == roomid)
@@ -314,7 +367,7 @@ namespace offyesproj.Controllers
                .Include(w => w.ListOfUsers)
                .ThenInclude(u => u.User)
                .FirstOrDefault(w => w.RoomID == roomid);
-            
+
             ViewBag.Userplay = players.ListOfUsers.OrderByDescending(s => s.TotalScore).ThenBy(k => k.TotalTimeAnswer);
             ViewBag.RoomID = roomid;
 
@@ -396,25 +449,33 @@ namespace offyesproj.Controllers
         [HttpGet("displayanswers/{roomid}/{quesid}")]
         public IActionResult DisplayAnswer(int roomid, int quesid)
         {
-            var currentquestion = dbContext.Questions
+            if (HttpContext.Session.GetString("Session") == null)
+            {
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                var currentquestion = dbContext.Questions
             .Include(qu => qu.ListOfAnswers)
             .FirstOrDefault(a => a.QuestionID == quesid);
 
-            ViewBag.Ans1 = currentquestion.ListOfAnswers[0].AnswerText;
-            ViewBag.Ans2 = currentquestion.ListOfAnswers[1].AnswerText;
-            ViewBag.Ans3 = currentquestion.ListOfAnswers[2].AnswerText;
-            ViewBag.Ans4 = currentquestion.ListOfAnswers[3].AnswerText;
+                ViewBag.Ans1 = currentquestion.ListOfAnswers[0].AnswerText;
+                ViewBag.Ans2 = currentquestion.ListOfAnswers[1].AnswerText;
+                ViewBag.Ans3 = currentquestion.ListOfAnswers[2].AnswerText;
+                ViewBag.Ans4 = currentquestion.ListOfAnswers[3].AnswerText;
 
-            ViewBag.Ans1ID = currentquestion.ListOfAnswers[0].AnswerID;
-            ViewBag.Ans2ID = currentquestion.ListOfAnswers[1].AnswerID;
-            ViewBag.Ans3ID = currentquestion.ListOfAnswers[2].AnswerID;
-            ViewBag.Ans4ID = currentquestion.ListOfAnswers[3].AnswerID;
+                ViewBag.Ans1ID = currentquestion.ListOfAnswers[0].AnswerID;
+                ViewBag.Ans2ID = currentquestion.ListOfAnswers[1].AnswerID;
+                ViewBag.Ans3ID = currentquestion.ListOfAnswers[2].AnswerID;
+                ViewBag.Ans4ID = currentquestion.ListOfAnswers[3].AnswerID;
 
-            ViewBag.PlayerRoomID = roomid;
-            ViewBag.PlayerQuestionID = currentquestion.QuestionID;
+                ViewBag.PlayerRoomID = roomid;
+                ViewBag.PlayerQuestionID = currentquestion.QuestionID;
 
-            
-            return View();
+
+                return View();
+            }
+
         }
 
         [HttpGet("BtAnswer/{ansid}/{roomid}/{quesid}")]
@@ -443,7 +504,7 @@ namespace offyesproj.Controllers
             .FirstOrDefault(ts => ts.QuestionID == currentquesid);
                 if (checkquestion == null)
                 {
-                    return RedirectToAction("PlayerGameOver", new {roomid = roomid});
+                    return RedirectToAction("PlayerGameOver", new { roomid = roomid });
                 }
                 else
                 {
@@ -457,11 +518,13 @@ namespace offyesproj.Controllers
             .FirstOrDefault(ts => ts.QuestionID == currentquesid);
                 if (checkquestion == null)
                 {
-                    return RedirectToAction("PlayerGameOver", new {roomid = roomid});
-                }else{
+                    return RedirectToAction("PlayerGameOver", new { roomid = roomid });
+                }
+                else
+                {
                     return RedirectToAction("DisplayAnswer", new { roomid = roomid, quesid = currentquesid });
                 }
-                
+
             }
         }
 
@@ -495,46 +558,46 @@ namespace offyesproj.Controllers
             return View();
         }
 
-        [HttpGet("endgame/{roomid}")]
-        public IActionResult EndGame(int roomid)
-        {
-            var ListPlayer = dbContext.Rooms
-            .Include(us => us.ListOfUsers)
-            .ThenInclude(x => x.User)
-            .FirstOrDefault(bc => bc.RoomID == roomid);
+        // [HttpGet("endgame/{roomid}")]
+        // public IActionResult EndGame(int roomid)
+        // {
+        //     var ListPlayer = dbContext.Rooms
+        //     .Include(us => us.ListOfUsers)
+        //     .ThenInclude(x => x.User)
+        //     .FirstOrDefault(bc => bc.RoomID == roomid);
 
-            // List<Room> Userplay = dbContext.Rooms
-            // .Include(us => us.ListOfUsers)
-            // .ThenInclude(x => x.User)
-            // .Where(ro => ro.RoomID == roomid)
-            // .OrderBy(sc => sc.)
-            // .ThenBy(ti => ti.User.TotalTimeAnswer)
-            // .ToList();
+        //     // List<Room> Userplay = dbContext.Rooms
+        //     // .Include(us => us.ListOfUsers)
+        //     // .ThenInclude(x => x.User)
+        //     // .Where(ro => ro.RoomID == roomid)
+        //     // .OrderBy(sc => sc.)
+        //     // .ThenBy(ti => ti.User.TotalTimeAnswer)
+        //     // .ToList();
 
-            // List<UserRoom> listuser = dbContext.UserRooms
-            // .Where(ro => ro.RoomID == roomid)
-            // .Include(o => o.User)
-            // .ToList()
-            // .ForEach(j => j.TotalScore = 0);
-            // foreach(var i in listuser){
-            //     i.User.TotalScore = 0;
-            //     i.User.TotalTimeAnswer = 0;
-            // }
-            ////////////////////////////////////////////////////////////
+        //     // List<UserRoom> listuser = dbContext.UserRooms
+        //     // .Where(ro => ro.RoomID == roomid)
+        //     // .Include(o => o.User)
+        //     // .ToList()
+        //     // .ForEach(j => j.TotalScore = 0);
+        //     // foreach(var i in listuser){
+        //     //     i.User.TotalScore = 0;
+        //     //     i.User.TotalTimeAnswer = 0;
+        //     // }
+        //     ////////////////////////////////////////////////////////////
 
-            // List<UserRoom> ListPlayer1 = dbContext.UserRooms
-            // .Where(r => r.RoomID == roomid)
-            // .Include(x => x.User)
-            // .ToList();
+        //     // List<UserRoom> ListPlayer1 = dbContext.UserRooms
+        //     // .Where(r => r.RoomID == roomid)
+        //     // .Include(x => x.User)
+        //     // .ToList();
 
-            // foreach(UserRoom i in ListPlayer1)
-            // {
-            //     i.TotalScore = 0;
-            //     i.TotalTimeAnswer = 0;
-            // }
+        //     // foreach(UserRoom i in ListPlayer1)
+        //     // {
+        //     //     i.TotalScore = 0;
+        //     //     i.TotalTimeAnswer = 0;
+        //     // }
 
-            // dbContext.SaveChanges();
-            return View();
-        }
+        //     // dbContext.SaveChanges();
+        //     return View();
+        // }
     }
 }
