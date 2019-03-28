@@ -1,10 +1,11 @@
 @model User
-<div class="limiter">
+<head>
+   <link rel="stylesheet" type="text/css" href="~/css/register.css">
+</head>
 	<div class="container-login100">
-		<div class="wrap-login100">
-			<div class="login100-pic js-tilt" data-tilt>
-				<img src="~/images/brain.gif" alt="IMG">
-			</div>
+
+		<div id="register">
+			<img id="logo" src="~/images/offyes.png" alt="IMG">
 			<form asp-action="btRegister" asp-controller="Home" method="POST" class="login100-form validate-form">
 				<span class="login100-form-title">
 					Member Register
@@ -51,7 +52,7 @@
 
 		</div>
 	</div>
-</div>
+
 
 
 

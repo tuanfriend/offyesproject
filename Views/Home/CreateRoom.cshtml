@@ -5,9 +5,10 @@
 <div class="container-login100">
     @model Room
     <div id="createroom">
+        <img id="logo" src="~/images/offyes.png" alt="IMG">
         <h1>Create a new Room</h1><br>
         <form asp-action="Bt_Create_New_Room" asp-controller="Home" method="post">
-            <h2>Room Code:<br><input type="text" asp-for="RoomCode" class="input100"></h2><span asp-validation-for="RoomCode"></span>
+            <h2>Room Code:<br><input type="text" asp-for="RoomCode" class="input100" placeholder="Enter Room Code Here"></h2><span asp-validation-for="RoomCode"></span>
             <button id=button class="login100-form-btn">Create</button>
         </form>
     </div>

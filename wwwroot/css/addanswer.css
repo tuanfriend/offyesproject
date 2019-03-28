@@ -1,7 +1,18 @@
 #box{
-    background-color: lightgray;
+    background-color: white;
     border-radius:10px;
     padding: 20px;
     border: 3px solid black;
     box-shadow: 10px 10px 10px black;
+}
+#bt{
+    margin-top: 10px;
+    background-color:#4083ef;
+    width: 130px;
+    height: 40px;
+    border-radius: 10px;
+    color:white;
+    font-size: 100%;
+    box-shadow: 10px 10px 10px black;
+
 }
