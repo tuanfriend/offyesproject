@@ -1,20 +1,13 @@
-<style>
-    #createroom{
-    background-color: white;
-    border-radius:10px;
-    padding: 20px;
-    border: 1px solid black;
-    }
-    #roomcode{
-        margin-left: 57px;
-    }
-</style>
+<head>
+<link rel="stylesheet" type="text/css" href="~/css/createroom.css">
+</head>
+
 <div class="container-login100">
     @model Room
     <div id="createroom">
-        <h2>Create a new Room</h2><br>
+        <h1>Create a new Room</h1><br>
         <form asp-action="Bt_Create_New_Room" asp-controller="Home" method="post">
-            <h4>Room Code:<br><span asp-validation-for="RoomCode"></span><br><input type="text" asp-for="RoomCode" class="input100"></h4><br>
+            <h2>Room Code:<br><input type="text" asp-for="RoomCode" class="input100"></h2><span asp-validation-for="RoomCode"></span>
             <button id=button class="login100-form-btn">Create</button>
         </form>
     </div>

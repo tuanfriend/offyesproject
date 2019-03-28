@@ -1,19 +1,18 @@
 ﻿@model LoginUser
-
-<div class="limiter">
-
+<head>
+   <link rel="stylesheet" type="text/css" href="~/css/login.css">
+</head>
     <div class="container-login100">
 
-        <div class="wrap-login100">
-            <div class="login100-pic js-tilt" data-tilt>
-                <img src="~/images/brain.gif" alt="IMG">
-            </div>
+        <div id="login">
+            <img id="logo" src="~/images/offyes.png" alt="IMG">
+      
             <form class="login100-form validate-form" asp-action="btLogin" asp-controller="Home" method="POST">
                 <span class="login100-form-title">
                     Member Login
                 </span>
 
-                <div class="wrap-input100 validate-input" data-validate="Nick Name  is required">
+                <div class="wrap-input100 validate-input" data-validate="Nick Name is required">
                     <input class="input100" type="text" asp-for="LoginNickName" placeholder="Nick name">
                     <span class="focus-input100"></span>
                     <span class="symbol-input100">
@@ -54,7 +53,7 @@
 
         </div>
     </div>
-</div>
+
 
 
 

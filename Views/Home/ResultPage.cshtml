@@ -4,14 +4,18 @@
 
 
 <div class="container-login100">
-<img id="fireworks" src="~/images/fireworks.gif" alt="IMG">
-    <div class="box">
+
+    <div id="box">
+    <img id="fireworks" src="~/images/fireworks.gif" alt="IMG">
         <h1>Final Results!</h1>
+        <img id="fireworks" src="~/images/fireworks.gif" alt="IMG">
         <table class="table">
             <tr>
+                <th>Ranking</th>
                 <th>Player</th>
                 <th>Player Score</th>
             </tr>
+
             @foreach (var item in ViewBag.Userplay)
             {
                 <tr>
@@ -21,6 +25,7 @@
             }
             
         </table>
+
         <a href="/logout"><button class="btn btn-primary">End Game</button></a>
     </div>
 

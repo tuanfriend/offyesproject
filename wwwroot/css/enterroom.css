@@ -1,0 +1,26 @@
+#enterroom{
+    border: 3px solid black;
+    padding: 20px;
+    background: white;
+    border-radius: 10px;
+    text-align: center;
+    width: 550px;
+    box-shadow: 10px 10px 100px black;
+}
+.input100{
+    margin-bottom: 25px;
+    box-shadow: 10px 10px 10px black;
+    height: 60px;
+}
+@keyframes spin { 
+    from { 
+        transform: rotate(0deg); 
+    } to { 
+        transform: rotate(360deg); 
+    }
+}
+
+img{
+    animation-name: spin;
+    animation-duration: 4000ms;
+}

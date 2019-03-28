@@ -1,45 +1,42 @@
-
-
 <head>
-    <link rel="stylesheet" type="text/css" href="~/css/dash.css">
+  <link rel="stylesheet" type="text/css" href="~/css/addanswer.css">
 </head>
 
-<div class="limiter">
-
-    <div class="container-login100">
-
+<div class="container-login100">
+  <div id="box">
     <form action="/btAddAnswer" method="post">
-      <h2>@ViewBag.QueName</h2><br>
-    <div class="form-row">
-    <div class="form-group col-md-6">
-      <label for="inputEmail4">Answer 1</label>
-      <input type="text" name="answer1" class="form-control" id="inputEmail4" placeholder="Answer 1">
-      <input type="checkbox" name="ckanswer1" value="true"> Correct<br>
-    </div>
+      <h2>@ViewBag.QueName ?</h2><br>
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="inputEmail4">Answer 1</label>
+          <input type="text" name="answer1" class="form-control" id="inputEmail4" placeholder="Answer 1">
+          <input type="checkbox" name="ckanswer1" value="true"> Correct<br>
+        </div>
 
-    <div class="form-group col-md-6">
-      <label for="inputEmail4">Answer 2</label>
-      <input type="text" name="answer2" class="form-control" id="inputEmail4" placeholder="Answer 1">
-      <input type="checkbox" name="ckanswer2" value="true"> Correct<br>
-    </div>
+        <div class="form-group col-md-6">
+          <label for="inputEmail4">Answer 2</label>
+          <input type="text" name="answer2" class="form-control" id="inputEmail4" placeholder="Answer 1">
+          <input type="checkbox" name="ckanswer2" value="true"> Correct<br>
+        </div>
 
-    <div class="form-group col-md-6">
-      <label for="inputEmail4">Answer 3</label>
-      <input type="text" name="answer3" class="form-control" id="inputEmail4" placeholder="Answer 1">
-      <input type="checkbox" name="ckanswer3" value="true"> Correct<br>
-    </div>
+        <div class="form-group col-md-6">
+          <label for="inputEmail4">Answer 3</label>
+          <input type="text" name="answer3" class="form-control" id="inputEmail4" placeholder="Answer 1">
+          <input type="checkbox" name="ckanswer3" value="true"> Correct<br>
+        </div>
 
-    <div class="form-group col-md-6">
-      <label for="inputEmail4">Answer 4</label>
-      <input type="text" name="answer4" class="form-control" id="inputEmail4" placeholder="Answer 1">
-      <input type="checkbox" name="ckanswer4" value="true"> Correct<br>
-      <input type="hidden" name="QueID" value="@ViewBag.QueID">
-    </div>
-</div>
-<br>
-  <button type="submit" class="btn btn-primary">Add Answers</button>
-</form>
-    </div>
+        <div class="form-group col-md-6">
+          <label for="inputEmail4">Answer 4</label>
+          <input type="text" name="answer4" class="form-control" id="inputEmail4" placeholder="Answer 1">
+          <input type="checkbox" name="ckanswer4" value="true"> Correct<br>
+          <input type="hidden" name="QueID" value="@ViewBag.QueID">
+        </div>
+
+
+        <br>
+        <button type="submit" class="btn btn-primary">Add Answers</button>
+    </form>
+  </div>
 </div>
 
 <!--===============================================================================================-->
@@ -52,9 +49,9 @@
 <!--===============================================================================================-->
 <script src="~/vendor/tilt/tilt.jquery.min.js"></script>
 <script>
-    $('.js-tilt').tilt({
-        scale: 1.1
-    })
+  $('.js-tilt').tilt({
+    scale: 1.1
+  })
 </script>
 <!--===============================================================================================-->
 <script src="~/js/main.js"></script>

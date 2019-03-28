@@ -1,32 +1,19 @@
-<style>
-    #createroom{
-    background-color: white;
-    border-radius:10px;
-    padding: 20px;
-    border: 1px solid black;
-    }
-    #roomcode{
-        margin-left: 57px;
-    }
-    h2{
-        text-align: center;
-
-    }
-    .rightbt{
-        float: right;
-        width: 80px;
-    }
-</style>
+<head>
+    <link rel="stylesheet" type="text/css" href="~/css/loadquestion.css">
+</head>
 <div class="container-login100">
-    
-        <form asp-action="LoadNextQuestion" method="post" asp-controller="Home">
-            <input type="hidden" name="currentquestionID" value="@ViewBag.question.QuestionID">
-            <input type="hidden" name="roomID" value="@ViewBag.RoomID">
-            <button type="submit" class="btn btn-primary rightbt">Next</button>
-        </form>
-    <div id="createroom">
-        <h2>Time Count Down: <span id="countdowntimer">@ViewBag.question.Timer </span></h2><br>
-        <h4>@ViewBag.question.QuestionText</h4>
+
+    <div id="question">
+
+       
+            <h3>Countdown: <span id="countdowntimer">@ViewBag.question.Timer </span></h3><br>
+            <h4>"@ViewBag.question.QuestionText"</h4>
+            <form asp-action="LoadNextQuestion" method="post" asp-controller="Home">
+                <input type="hidden" name="currentquestionID" value="@ViewBag.question.QuestionID">
+                <input type="hidden" name="roomID" value="@ViewBag.RoomID">
+                <button type="submit" class="btn btn-primary rightbt">Next</button>
+            </form>
+      
 
     </div>
 
@@ -34,10 +21,10 @@
 
 <script type="text/javascript">
     var timeleft = @ViewBag.question.Timer;
-    var downloadTimer = setInterval(function(){
-    timeleft--;
-    document.getElementById("countdowntimer").textContent = timeleft;
-    if(timeleft <= 0)
-        clearInterval(downloadTimer);
-    },1000);
+    var downloadTimer = setInterval(function () {
+        timeleft--;
+        document.getElementById("countdowntimer").textContent = timeleft;
+        if (timeleft <= 0)
+            clearInterval(downloadTimer);
+    }, 1000);
 </script>

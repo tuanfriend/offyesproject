@@ -1,0 +1,25 @@
+#gameover{
+    border: 3px solid black;
+    background: cornflowerblue;
+    padding: 20px;
+    box-shadow: 5px 5px 5px black;
+    text-align: center;
+    width: 800px;
+    min-height: 500px;
+    border-radius:10px;
+}
+h1{
+    color: lightgreen;
+    text-shadow: 2px 2px 5px red;
+    margin-bottom: 20px;
+    margin-top: 40px;
+}
+img{
+    margin-bottom:20px;
+    border:3px solid pink;
+}
+button{
+    box-shadow: 10px 10px 10px black;
+    width: 300px;
+    height: 60px;
+}
