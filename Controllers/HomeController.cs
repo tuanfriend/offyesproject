@@ -268,13 +268,11 @@ namespace offyesproj.Controllers
             Question checkquestion = dbContext.Questions
             .Where(qu => qu.RoomID == currentroomID)
             .FirstOrDefault(ts => ts.QuestionID == currentquestionID);
-            if (checkquestion == null)
-            {
-                return View("ResultPage");
-            }
-            else
-            {
-                return RedirectToAction("LoadQuestion", new { roomid = currentroomID, questionid = currentquestionID });
+
+            if(checkquestion == null){
+                return RedirectToAction("ResultPage");
+            }else{
+                return RedirectToAction("LoadQuestion", new {roomid = currentroomID, questionid = currentquestionID});
             }
         }
 
@@ -372,6 +370,13 @@ namespace offyesproj.Controllers
             
             return View();
         }
+        
+        [HttpGet("resultpage")]
+        public IActionResult ResultPage()
+        {
+            return View("ResultPage");
+        }
+
 
         [HttpGet("BtAnswer/{ansid}/{roomid}/{quesid}")]
         public IActionResult BtAnswer(int ansid, int roomid, int quesid)
@@ -415,6 +420,7 @@ namespace offyesproj.Controllers
                 
             }
         }
+
 
 
     }
