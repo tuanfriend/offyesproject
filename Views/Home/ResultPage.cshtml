@@ -15,13 +15,18 @@
                 <th>Player</th>
                 <th>Player Score</th>
             </tr>
-            <tr>
-                <td>#1</td>
-                <td>Daniel</td>
-                <td>Some PlayerScore</td>
+
+            @foreach (var item in ViewBag.Userplay)
+            {
+                <tr>
+                <td>@item.User.NickName</td>
+                <td>@item.TotalScore</td>
             </tr>
+            }
+            
         </table>
-        <a href=""><button class="btn btn-danger">Play Again?</button></a>
+
+        <a href="/logout"><button class="btn btn-primary">End Game</button></a>
     </div>
 
 </div>
