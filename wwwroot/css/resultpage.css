@@ -1,0 +1,58 @@
+#fireworks{
+    position: absolute;
+    z-index:0;
+    
+}
+.box{
+    border: 3px solid black;
+    padding:20px;
+    background-color: palevioletred;
+    border-radius: 10px;
+    width: 55%;
+    text-align: center;
+    animation-name: slidein;
+    animation-duration: 4s;
+    z-index:0;
+
+}
+th{
+    font-size: 150%;
+    text-align: center;
+}
+h1{
+    margin-bottom:20px;
+}
+
+@keyframes slidein {
+    from {
+        margin-top:100%
+    }
+    to{
+        margin-top: 0%;
+    }
+}
+.box {
+    width: 960px;
+    background: palevioletred;
+    border-radius: 10px;
+    overflow: hidden;
+  
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: inline-block;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 40px 95px;
+    text-align: center; 
+  }
+  @media (max-width: 576px) {
+    .box {
+        margin-top: -150px;
+        display: inline-table;
+      vertical-align: top;
+      padding: 40px 12px;
+      justify-content: space-between;
+    }
+}

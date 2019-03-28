@@ -297,7 +297,7 @@ namespace offyesproj.Controllers
             .Where(qu => qu.RoomID == currentroomID)
             .FirstOrDefault(ts => ts.QuestionID == currentquestionID);
             if(checkquestion == null){
-                return View("ResultPage");
+                return RedirectToAction("ResultPage");
             }else{
                 return RedirectToAction("LoadQuestion", new {roomid = currentroomID, questionid = currentquestionID});
             }
@@ -361,6 +361,12 @@ namespace offyesproj.Controllers
         public IActionResult UserReady(int userid)
         {
             return View();
+        }
+        
+        [HttpGet("resultpage")]
+        public IActionResult ResultPage()
+        {
+            return View("ResultPage");
         }
     }
 }
