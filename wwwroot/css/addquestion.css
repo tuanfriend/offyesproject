@@ -8,6 +8,18 @@ box-shadow: 10px 10px 10px black;
 }
 
 #head{
-    font-size: 180%;
-
+    font-size: 250%;
 }
+
+#bt{
+    float:right;
+    margin-top: 20px;
+    background-color: green;
+    width: 150px;
+    height: 50px;
+    border-radius: 20px;
+    color:white;
+    font-size: 120%;
+    box-shadow: 10px 10px 10px black;
+}
+  

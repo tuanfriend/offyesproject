@@ -1,14 +1,17 @@
 
-<div class="limiter">
+<head>
+   <link rel="stylesheet" type="text/css" href="~/css/userready.css">
+</head>
+
 
     <div class="container-login100">
-
-        <h1>You are in the Game Now!!!</h1>
-        <br><br>
-        <a href="/displayanswers/@ViewBag.PlayerRoomID/@ViewBag.num"><button class="btn btn-primary ">Start Game</button></a>
-
+        <div id="userready">
+        <h1>You're set to go!<br><br>Wait for Others to Join...</h1>
+        <img id="face" src="~/images/gameface.gif" alt="IMG"><br>
+        <a href="/displayanswers/@ViewBag.PlayerRoomID/@ViewBag.num"><button id="bt">Start Game</button></a>
+        </div>
     </div>
-</div>
+
 
 <!--===============================================================================================-->
 <script src="~/vendor/jquery/jquery-3.2.1.min.js"></script>

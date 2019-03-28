@@ -1,0 +1,39 @@
+#userready{
+    border: 3px solid black;
+    padding: 20px;
+    background-color: white;
+    box-shadow: 10px 10px 10px black;
+    border-radius: 10px;
+    text-align: center;
+}
+img{
+    margin-top:25px;
+    margin-bottom: 25px;
+}
+@media (max-width: 576px) {
+    #userready {
+    margin-top: -20px;
+    display: inline-table;
+      vertical-align: top;
+      padding: 40px 12px;
+      justify-content: space-between;
+    }
+    img{
+        width:90%;
+        
+    }
+    h1{
+        font-size: 200%;
+    }
+}
+#bt{
+    background-color:green;
+    width: 150px;
+    height: 40px;
+    border-radius: 20px;
+    color:white;
+    font-size: 150%;
+    box-shadow: 10px 10px 10px black;
+}
+
+

@@ -11,7 +11,7 @@
   h1{
       margin-bottom: 15px;
   }
-  img{
+  #itson{
       margin-bottom: 30px;
       border: 3px solid green;
   }
@@ -23,12 +23,17 @@
       border-radius: 10px;
       height: 60px;
       padding-top:12px;
+      box-shadow: 10px 10px 10px black;
+  }
+  #logo{
+      height:150px;
+      width:150px;
   }
   </style>
 <div class="container-login100">
     <div id="ready">
         <h1> Is Everyone Ready to Play?</h1>
-        <img src="~/images/ohitson.gif" alt="IMG">
+        <img id="itson" src="~/images/ohitson.gif" alt="IMG">
         <h3>Room Code: </h3>
         <h3 class="code">@ViewBag.RoomCode</h3>
         <a href="/loadquestion/@ViewBag.RoomID/@ViewBag.num"><button class="login100-form-btn">Play Now ...Go ! ! !</button></a>

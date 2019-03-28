@@ -3,7 +3,7 @@
     border-radius:10px;
     padding: 20px;
     border: 3px solid black;
-    box-shadow: 10px 10px 10px black;
+    box-shadow: 10px 10px 100px black;
     width: 600px;
     min-height: 330px;
     text-align: center;
@@ -12,13 +12,15 @@
         margin-left: 57px;
     }
     h2{    
-    color: blue;
-    text-shadow: 2px 2px 5px red;
+    color: black;
+    text-shadow: 2px 2px 5px lawngreen;
     font-size: 300%;
   
     }
     .input100{
         margin-top: 20px;
+        box-shadow: 5px 5px 20px black;
+
     }
     #button{
         margin-top: 20px;
@@ -26,3 +28,8 @@
     span{
         color:red;
     }
+    #logo{
+        width: 150px;
+        height:170px;
+    }
+    
