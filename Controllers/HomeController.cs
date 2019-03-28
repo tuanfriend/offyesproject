@@ -111,12 +111,6 @@ namespace offyesproj.Controllers
             return RedirectToAction("Index");
         }
 
-        [HttpGet("answers")]
-        public IActionResult DisplayAnswer()
-        {
-            return View();
-        }
-
         [HttpGet("addquestion/{id}")]
         public IActionResult AddQuestion(int id)
         {
@@ -233,22 +227,11 @@ namespace offyesproj.Controllers
         public IActionResult Ready(int roomid)
         {
             ViewBag.listOfQuestions = dbContext.Questions.Where(qu => qu.RoomID == roomid).ToList();
-            
-            
+
             Room roomworking = dbContext.Rooms.SingleOrDefault(u => u.RoomID == roomid);
             ViewBag.RoomCode = roomworking.RoomCode;
             ViewBag.RoomID = roomid;
-
             ViewBag.num = ViewBag.listOfQuestions[0].QuestionID;
-            //return View("LoadQuestion", new{ roomid = roomid, questionid = ViewBag.num});
-            // int num = 0;
-            // num++;
-            // int questid = ViewBag.listOfQuestions[num].QuestionID;
-            // if(questid == null){
-            //     return RedirectToAction("index");
-            // }else{
-            //     return View("Ready", new { roomid = roomid, qid = questid });
-            // }
             return View();
         }
 
@@ -257,17 +240,6 @@ namespace offyesproj.Controllers
         {
             ViewBag.question = dbContext.Questions.FirstOrDefault(a => a.QuestionID == questionid);
 
-            //ViewBag.listOfQuestions = dbContext.Questions.Where(qu => qu.RoomID == roomid).ToList();
-            //int questid = questionid; //13
-           // questid ++;
-            //int? nextquestid = ViewBag.listOfQuestions[questid].QuestionID;
-           // if(nextquestid == null){
-            //    return RedirectToAction("ResultPage");
-            //}else{
-           //     return RedirectToAction("LoadQuestion", {new = })
-           // }
-          //  ViewBag.questionnext = dbContext.Questions.FirstOrDefault(a => a.QuestionID == questid);
-            
             // Room currentroom = dbContext.Rooms
             // .Include(q => q.ListOfUsers)
             // .ThenInclude(u => u.User)
@@ -292,14 +264,17 @@ namespace offyesproj.Controllers
             int currentroomID = Int32.Parse(Request.Form["roomID"]);
 
             ViewBag.listOfQuestions = dbContext.Questions.Where(qu => qu.RoomID == currentroomID).ToList();
-            
+
             Question checkquestion = dbContext.Questions
             .Where(qu => qu.RoomID == currentroomID)
             .FirstOrDefault(ts => ts.QuestionID == currentquestionID);
-            if(checkquestion == null){
+            if (checkquestion == null)
+            {
                 return View("ResultPage");
-            }else{
-                return RedirectToAction("LoadQuestion", new {roomid = currentroomID, questionid = currentquestionID});
+            }
+            else
+            {
+                return RedirectToAction("LoadQuestion", new { roomid = currentroomID, questionid = currentquestionID });
             }
         }
 
@@ -352,7 +327,8 @@ namespace offyesproj.Controllers
                 userandroom.AnswerSheet = "okay";
                 dbContext.Add(userandroom);
                 dbContext.SaveChanges();
-                return RedirectToAction("UserReady", new{userid = userandroom.UserID });
+                HttpContext.Session.SetInt32("PlayerRoomID", userandroom.RoomID);
+                return RedirectToAction("UserReady", new { userid = userandroom.UserID });
             }
 
         }
@@ -360,7 +336,86 @@ namespace offyesproj.Controllers
         [HttpGet("userready/{userid}")]
         public IActionResult UserReady(int userid)
         {
+            List<Question> listquestionInRoom = dbContext.Questions
+            .Where(u => u.RoomID == HttpContext.Session.GetInt32("PlayerRoomID"))
+            .Include(an => an.ListOfAnswers)
+            .ToList();
+
+            ViewBag.PlayerUserID = userid;
+            ViewBag.num = listquestionInRoom[0].QuestionID;
+            ViewBag.PlayerRoomID = HttpContext.Session.GetInt32("PlayerRoomID");
+            HttpContext.Session.SetInt32("PlayerScore", 0);
+
             return View();
         }
+
+        [HttpGet("displayanswers/{roomid}/{quesid}")]
+        public IActionResult DisplayAnswer(int roomid, int quesid)
+        {
+            var currentquestion = dbContext.Questions
+            .Include(qu => qu.ListOfAnswers)
+            .FirstOrDefault(a => a.QuestionID == quesid);
+
+            ViewBag.Ans1 = currentquestion.ListOfAnswers[0].AnswerText;
+            ViewBag.Ans2 = currentquestion.ListOfAnswers[1].AnswerText;
+            ViewBag.Ans3 = currentquestion.ListOfAnswers[2].AnswerText;
+            ViewBag.Ans4 = currentquestion.ListOfAnswers[3].AnswerText;
+
+            ViewBag.Ans1ID = currentquestion.ListOfAnswers[0].AnswerID;
+            ViewBag.Ans2ID = currentquestion.ListOfAnswers[1].AnswerID;
+            ViewBag.Ans3ID = currentquestion.ListOfAnswers[2].AnswerID;
+            ViewBag.Ans4ID = currentquestion.ListOfAnswers[3].AnswerID;
+
+            ViewBag.PlayerRoomID = roomid;
+            ViewBag.PlayerQuestionID = currentquestion.QuestionID;
+
+            
+            return View();
+        }
+
+        [HttpGet("BtAnswer/{ansid}/{roomid}/{quesid}")]
+        public IActionResult BtAnswer(int ansid, int roomid, int quesid)
+        {
+            Answer currentanswer = dbContext.Answers
+            .FirstOrDefault(a => a.AnswerID == ansid);
+            int currentquesid = quesid;
+            currentquesid++;
+
+            if (currentanswer.CorrectAnswer == true)
+            {
+                int getpoint = (int)HttpContext.Session.GetInt32("PlayerScore");
+                getpoint++;
+                HttpContext.Session.SetInt32("PlayerScore", getpoint);
+                Console.WriteLine("//////////////////////////////update point");
+                Console.WriteLine(HttpContext.Session.GetInt32("PlayerScore"));
+                Question checkquestion = dbContext.Questions
+            .Where(qu => qu.RoomID == roomid)
+            .FirstOrDefault(ts => ts.QuestionID == currentquesid);
+                if (checkquestion == null)
+                {
+                    return View("DoneGame");
+                }
+                else
+                {
+                    return RedirectToAction("DisplayAnswer", new { roomid = roomid, quesid = currentquesid });
+                }
+
+            }
+            else
+            {
+                Question checkquestion = dbContext.Questions
+            .Where(qu => qu.RoomID == roomid)
+            .FirstOrDefault(ts => ts.QuestionID == currentquesid);
+                if (checkquestion == null)
+                {
+                    return View("DoneGame");
+                }else{
+                    return RedirectToAction("DisplayAnswer", new { roomid = roomid, quesid = currentquesid });
+                }
+                
+            }
+        }
+
+
     }
 }
