@@ -1,9 +1,11 @@
 #fireworks{
-    position: absolute;
-    z-index:0;
-    
+    /* position: absolute; */
+    z-index:0; 
+    width: 100px;
+    height:100px;
+    display: inline-block;
 }
-.box{
+#box{
     border: 3px solid black;
     padding:20px;
     background-color: palevioletred;
@@ -13,14 +15,27 @@
     animation-name: slidein;
     animation-duration: 4s;
     z-index:0;
+    box-shadow: 10px 10px 10px black;
+    min-height: 400px;
 
 }
-th{
+td{
+    color: black;
     font-size: 150%;
+    text-shadow: 2px 2px 5px green;
+}
+th{
+    font-size: 200%;
     text-align: center;
+    color: lightcyan;
+    text-shadow: 2px 2px 5px red;
+    
 }
 h1{
+    color: lightcyan;
+    text-shadow: 2px 2px 5px red;
     margin-bottom:20px;
+    display: inline-block;
 }
 
 @keyframes slidein {

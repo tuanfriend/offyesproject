@@ -1,0 +1,46 @@
+#question{
+    background-color: blanchedalmond;
+    padding:20px;
+    border:3px solid black;
+    border-radius: 10px;
+    box-shadow: 10px 10px 10px black;
+    width: 55%;
+    animation-name: slidein;
+    animation-duration: 2s;
+}
+h4{
+    margin-bottom: 30px;
+    font-size: 250%;
+}
+h3{
+    float:right;
+}
+#question button{
+    float:right;
+    width: 100px;
+    height: 50px;
+}
+#countdowntimer{
+    color: red;
+    font-weight: bolder;
+}
+
+@keyframes slidein {
+    from {
+        margin-right:100%;
+    
+    }
+    to{
+        margin-right: 0%;
+    
+    }
+}
+
+@media (max-width: 576px) {
+    #question {
+        margin-top: -150px;
+        display: inline-table;
+      vertical-align: top;
+      padding: 40px 12px;
+      justify-content: space-between;
+    }
