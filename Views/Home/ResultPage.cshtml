@@ -15,15 +15,18 @@
                 <th>Player</th>
                 <th>Player Score</th>
             </tr>
-
+            @{
+            int count = 1;
             @foreach (var item in ViewBag.Userplay)
             {
                 <tr>
+                <td>@count</td>
                 <td>@item.User.NickName</td>
                 <td>@item.TotalScore</td>
             </tr>
+            count++;
             }
-            
+            }
         </table>
 
         <a href="/logout"><button class="btn btn-primary">End Game</button></a>
