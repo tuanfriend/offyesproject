@@ -12,6 +12,9 @@ h4{
     margin-bottom: 30px;
     font-size: 250%;
 }
+audio { 
+    display:none;
+ }
 h3{
     float:right;
 }

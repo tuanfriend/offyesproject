@@ -1,20 +1,22 @@
 <head>
     <link rel="stylesheet" type="text/css" href="~/css/loadquestion.css">
 </head>
-<div class="container-login100">
+<audio style="display:none" controls autoplay>
+  <source src=@Html.Raw(ViewBag.timer) type="audio/mpeg" hidden='true'>
+</audio>
 
+<div class="container-login100">
     <div id="question">
 
        
             <h3>Countdown: <span id="countdowntimer">@ViewBag.question.Timer </span></h3><br>
-            <h4>"@ViewBag.question.QuestionText"</h4>
+            <h4>@ViewBag.question.QuestionText</h4>
             <form asp-action="LoadNextQuestion" method="post" asp-controller="Home">
                 <input type="hidden" name="currentquestionID" value="@ViewBag.question.QuestionID">
                 <input type="hidden" name="roomID" value="@ViewBag.RoomID">
                 <button type="submit" class="btn btn-primary rightbt">Next</button>
             </form>
-      
-
+            
     </div>
 
 </div>
