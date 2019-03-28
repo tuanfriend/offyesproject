@@ -1,29 +1,31 @@
 <head>
-    <link rel="stylesheet" type="text/css" href="~/css/dash.css">
+  <link rel="stylesheet" type="text/css" href="~/css/addquestion.css">
 </head>
 
 @model Question
 <div class="limiter">
 
-    <div class="container-login100">
+  <div class="container-login100">
+    <div id="content">
+      <form asp-action="Bt_Add_Questions" asp-controller="Home" method="post">
 
-        <form asp-action="Bt_Add_Questions" asp-controller="Home" method="post">
-  
-    <div class="form-group">
-    <label for="inputAddress">Question</label>
-    <input asp-for="QuestionText" type="text" class="form-control" id="inputAddress" placeholder="Add question here...">
-  </div>
-<input type="hidden" asp-for="RoomID" value="@ViewBag.RoomID">
+        <div class="form-group">
+          <label for="inputAddress" id="head">Question</label>
+          <input asp-for="QuestionText" type="text" class="form-control" id="inputAddress"
+            placeholder="Add question here...">
+        </div>
+        <input type="hidden" asp-for="RoomID" value="@ViewBag.RoomID">
 
-<select class="form-control" asp-for="Timer">
-  <option value="10">10 seconds</option>
-  <option value="15">15 seconds</option>
-  <option value="20">20 seconds</option>
-</select>
-<br>
-  <button type="submit" class="btn btn-primary">Add Answer</button>
-</form>
+        <select class="form-control" asp-for="Timer">
+          <option value="10">10 seconds</option>
+          <option value="15">15 seconds</option>
+          <option value="20">20 seconds</option>
+        </select>
+        <br>
+        <button type="submit" class="btn btn-primary">Add Answer</button>
+      </form>
     </div>
+  </div>
 </div>
 
 <!--===============================================================================================-->
@@ -36,9 +38,9 @@
 <!--===============================================================================================-->
 <script src="~/vendor/tilt/tilt.jquery.min.js"></script>
 <script>
-    $('.js-tilt').tilt({
-        scale: 1.1
-    })
+  $('.js-tilt').tilt({
+    scale: 1.1
+  })
 </script>
 <!--===============================================================================================-->
 <script src="~/js/main.js"></script>
