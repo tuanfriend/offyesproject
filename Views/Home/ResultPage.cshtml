@@ -20,7 +20,16 @@
             @foreach (var item in ViewBag.Userplay)
             {
                 <tr>
-                <td>@count</td>
+                    @if(count == 1){
+                        <td><img style="width: 32px;" src="~/images/top1.png"></td>
+                    }else if(count == 2){
+                        <td><img style="width: 32px;" src="~/images/top2.png"></td>
+                    }else if(count == 3){
+                        <td><img style="width: 32px;" src="~/images/top3.png"></td>
+                    }else{
+                        <td>@count</td>
+                    }
+                
                 <td>@item.User.NickName</td>
                 <td>@item.TotalScore</td>
             </tr>
