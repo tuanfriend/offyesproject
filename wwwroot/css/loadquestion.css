@@ -21,6 +21,7 @@
     animation-duration: 2s;
     z-index: 1;
     position: absolute;
+    text-align: center;
 }
 h4{
     margin-bottom: 30px;
@@ -42,6 +43,10 @@ h3{
     font-weight: bolder;
 }
 
+#logo{
+    margin-bottom: 10px;
+}
+
 @keyframes slidein {
     from {
         margin-right:100%;
@@ -61,3 +66,4 @@ h3{
       padding: 40px 12px;
       justify-content: space-between;
     }
+}

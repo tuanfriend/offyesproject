@@ -10,6 +10,15 @@
 #logo{
     width:150px;
     height:150px;
+    animation-name: spin;
+    animation-duration: 4000ms;
+}
+@keyframes spin { 
+    from { 
+        transform: rotate(0deg); 
+    } to { 
+        transform: rotate(360deg); 
+    }
 }
 /* .login100-form-title {
     font-family: Poppins-Bold;
