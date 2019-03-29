@@ -1,0 +1,22 @@
+#content{
+    border: 3px solid black;
+    padding: 20px;
+    border-radius:10px;
+    background-color: white;
+    width: 85%;
+    text-align: center;
+}
+th{
+    text-align: center;
+    font-size: 180%;
+    
+}
+h2{
+    font-size:220%;
+    text-shadow: 1px 1px 2px purple;
+    color:black;
+}
+
+td{
+    font-size:150%;
+}

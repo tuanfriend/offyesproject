@@ -2,52 +2,35 @@
     <link rel="stylesheet" type="text/css" href="~/css/reviewquestion.css">
 </head>
 
-<div class="limiter">
 
-    <div class="container-login100">
-        <h2>Here are the questions for your room:</h2><br>
-    <table class="table table-dark">
-  <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">Question</th>
-      <th scope="col">Answer</th>
-    </tr>
-  </thead>
-  <tbody>@{
-      int count = 1;
-      @foreach(var each in ViewBag.listquestion){
-          <tr>
-      <th scope="row">@count</th>
-      <td>@each.QuestionText</td>
-      <td>@foreach(var ans in each.ListOfAnswers){
-          @ans.AnswerText<br>
-      }
-      </td>
-    </tr>
-    count++;
-      }
-      }
-  </tbody>
-</table>
-<a href="/addquestion/@ViewBag.RoomID"><button class="btn btn-primary ">Add More Question</button></a>&nbsp;
-<a href="/ready/@ViewBag.RoomID"><button class="btn btn-primary ">Done</button></a>
+<div class="container-login100">
+    <div id="content">
+        <h2>Here are the questions for your room</h2><br>
+        <table class="table table-dark">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Question</th>
+                    <th scope="col">Answer</th>
+                </tr>
+            </thead>
+            <tbody>@{
+                int count = 1;
+                @foreach(var each in ViewBag.listquestion){
+                <tr>
+                    <td scope="row">@count</td>
+                    <td>@each.QuestionText</td>
+                    <td>@foreach(var ans in each.ListOfAnswers){
+                        @ans.AnswerText<br>
+                        }
+                    </td>
+                </tr>
+                count++;
+                }
+                }
+            </tbody>
+        </table>
+        <a href="/addquestion/@ViewBag.RoomID"><button class="btn btn-primary ">Add More Question</button></a>&nbsp;
+        <a href="/ready/@ViewBag.RoomID"><button class="btn btn-primary ">Done</button></a>
     </div>
 </div>
-
-<!--===============================================================================================-->
-<script src="~/vendor/jquery/jquery-3.2.1.min.js"></script>
-<!--===============================================================================================-->
-<script src="~/vendor/bootstrap/js/popper.js"></script>
-<script src="~/vendor/bootstrap/js/bootstrap.min.js"></script>
-<!--===============================================================================================-->
-<script src="~/vendor/select2/select2.min.js"></script>
-<!--===============================================================================================-->
-<script src="~/vendor/tilt/tilt.jquery.min.js"></script>
-<script>
-    $('.js-tilt').tilt({
-        scale: 1.1
-    })
-</script>
-<!--===============================================================================================-->
-<script src="~/js/main.js"></script>
