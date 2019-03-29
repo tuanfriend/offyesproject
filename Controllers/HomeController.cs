@@ -418,15 +418,29 @@ namespace offyesproj.Controllers
             }
             else
             {
-                UserRoom userandroom = new UserRoom();
-                userandroom.UserID = (int)HttpContext.Session.GetInt32("UserID");
-                userandroom.RoomID = roomworking.RoomID;
-                userandroom.TotalScore = 0;
-                userandroom.TotalTimeAnswer = 0;
-                dbContext.Add(userandroom);
-                dbContext.SaveChanges();
-                HttpContext.Session.SetInt32("PlayerRoomID", userandroom.RoomID);
-                return RedirectToAction("UserReady", new { userid = userandroom.UserID });
+                var questinRoom = dbContext.Rooms
+                .Include(k => k.ListOfQuestions)
+                .FirstOrDefault(x => x.RoomID == roomworking.RoomID);
+                if (questinRoom.ListOfQuestions.Count == 0)
+                {
+                    Console.WriteLine("//////////////////////////////////////////");
+                    Console.WriteLine("This is working, add retrn view here");
+                    return View("EnterRoom");
+                }
+                else
+                {
+
+                    UserRoom userandroom = new UserRoom();
+                    userandroom.UserID = (int)HttpContext.Session.GetInt32("UserID");
+                    userandroom.RoomID = roomworking.RoomID;
+                    userandroom.TotalScore = 0;
+                    userandroom.TotalTimeAnswer = 0;
+                    dbContext.Add(userandroom);
+                    dbContext.SaveChanges();
+                    HttpContext.Session.SetInt32("PlayerRoomID", userandroom.RoomID);
+                    return RedirectToAction("UserReady", new { userid = userandroom.UserID });
+                }
+
             }
 
         }
