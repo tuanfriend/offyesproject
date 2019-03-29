@@ -2,37 +2,21 @@
     <link rel="stylesheet" type="text/css" href="~/css/displayanswer.css">
 </head>
 
-<div class="limiter">
 
     <div class="container-login100">
 
-        <div class="wrap-login100">
+        <div id="answers">
             
-            <div class="width50"><a href="/BtAnswer/@ViewBag.Ans1ID/@ViewBag.PlayerRoomID/@ViewBag.PlayerQuestionID"><p class="p-3 mb-2 bg-success text-white">@ViewBag.Ans1</p></a></div>&nbsp;
-            <div class="width50"><a href="/BtAnswer/@ViewBag.Ans2ID/@ViewBag.PlayerRoomID/@ViewBag.PlayerQuestionID"><p class="p-3 mb-2 bg-danger text-white">@ViewBag.Ans2 </p></a></div>
-            <br><br>
-            <div class="width50"><a href="/BtAnswer/@ViewBag.Ans3ID/@ViewBag.PlayerRoomID/@ViewBag.PlayerQuestionID"><p class="p-3 mb-2 bg-warning text-dark">@ViewBag.Ans3 </p></a></div>&nbsp;
-            <div class="width50"><a href="/BtAnswer/@ViewBag.Ans4ID/@ViewBag.PlayerRoomID/@ViewBag.PlayerQuestionID"><p class="p-3 mb-2 bg-info text-white">@ViewBag.Ans4 </p></a></div>
+            
+            <a href="/BtAnswer/@ViewBag.Ans1ID/@ViewBag.PlayerRoomID/@ViewBag.PlayerQuestionID"><p id="answer1">@ViewBag.Ans1</p></a>
+            <a href="/BtAnswer/@ViewBag.Ans2ID/@ViewBag.PlayerRoomID/@ViewBag.PlayerQuestionID"><p id="answer2">@ViewBag.Ans2 </p></a>
+            
+
+        
+            <a href="/BtAnswer/@ViewBag.Ans3ID/@ViewBag.PlayerRoomID/@ViewBag.PlayerQuestionID"><p id="answer3">@ViewBag.Ans3 </p></a>
+            <a href="/BtAnswer/@ViewBag.Ans4ID/@ViewBag.PlayerRoomID/@ViewBag.PlayerQuestionID"><p id="answer4">@ViewBag.Ans4 </p></a>
         
         </div>
 
 
     </div>
-</div>
-
-<!--===============================================================================================-->
-<script src="~/vendor/jquery/jquery-3.2.1.min.js"></script>
-<!--===============================================================================================-->
-<script src="~/vendor/bootstrap/js/popper.js"></script>
-<script src="~/vendor/bootstrap/js/bootstrap.min.js"></script>
-<!--===============================================================================================-->
-<script src="~/vendor/select2/select2.min.js"></script>
-<!--===============================================================================================-->
-<script src="~/vendor/tilt/tilt.jquery.min.js"></script>
-<script>
-    $('.js-tilt').tilt({
-        scale: 1.1
-    })
-</script>
-<!--===============================================================================================-->
-<script src="~/js/main.js"></script>
