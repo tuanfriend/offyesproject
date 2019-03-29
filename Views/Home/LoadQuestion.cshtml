@@ -1,32 +1,58 @@
 <head>
     <link rel="stylesheet" type="text/css" href="~/css/loadquestion.css">
+    <script language="javascript">
+        var timeout, interval
+        var threshold = @ViewBag.LoadTimer;
+        var secondsleft = threshold;
+
+        window.onload = function () {
+            startschedule();
+        }
+
+        function startChecking() {
+            secondsleft -= 1000;
+            document.querySelector(".div1").innerHTML = Math.abs((secondsleft / 1000));
+            if (secondsleft == 0) {
+                //document.getElementById("clickme").style.display="";
+                clearInterval(interval);
+                document.querySelector(".div1").style.display = "none";
+                document.querySelector(".div2").style.display = "";
+            }
+        }
+        function startschedule() {
+            clearInterval(interval);
+            secondsleft = threshold;
+            document.querySelector(".div1").innerHTML = Math.abs((secondsleft / 1000));
+            interval = setInterval(function () {
+                startChecking();
+            }, 1000)
+        }
+
+        function resetTimer() {
+            startschedule();
+        }
+    </script>
+
 </head>
 <audio style="display:none" controls autoplay>
-  <source src=@Html.Raw(ViewBag.timer) type="audio/mpeg" hidden='true'>
+    <source src=@Html.Raw(ViewBag.timer) type="audio/mpeg" hidden='true'>
 </audio>
+
 
 <div class="container-login100">
     <div id="question">
+        <h3>Time Left: <span id="countdowntimer" class="div1"></span></h3>
+        <div id="countdowntimer" class="div1"></div><br>
+        <h4>@ViewBag.question.QuestionText</h4>
+    </div>
 
-       
-            <h3>Countdown: <span id="countdowntimer">@ViewBag.question.Timer </span></h3><br>
-            <h4>@ViewBag.question.QuestionText</h4>
-            <form asp-action="LoadNextQuestion" method="post" asp-controller="Home">
-                <input type="hidden" name="currentquestionID" value="@ViewBag.question.QuestionID">
-                <input type="hidden" name="roomID" value="@ViewBag.RoomID">
-                <button type="submit" class="btn btn-primary rightbt">Next</button>
-            </form>
-            
+    <div class="div2" style="display:none;">
+        <h4>Are you ready for the next step!!!!</h4>
+        <form asp-action="LoadNextQuestion" method="post" asp-controller="Home">
+            <input type="hidden" name="currentquestionID" value="@ViewBag.question.QuestionID">
+            <input type="hidden" name="roomID" value="@ViewBag.RoomID">
+            <button type="submit" class="btn btn-primary rightbt">Let Continue!!!</button>
+        </form>
     </div>
 
 </div>
-
-<script type="text/javascript">
-    var timeleft = @ViewBag.question.Timer;
-    var downloadTimer = setInterval(function () {
-        timeleft--;
-        document.getElementById("countdowntimer").textContent = timeleft;
-        if (timeleft <= 0)
-            clearInterval(downloadTimer);
-    }, 1000);
-</script>
