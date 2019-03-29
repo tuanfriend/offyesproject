@@ -1,85 +1,29 @@
-.box{
+#box{
     width: 960px;
     background: white;
     border-radius: 10px;
-    overflow: hidden;
     border: 3px solid black;
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -moz-box;
-    display: -ms-flexbox;
-    display: inline-block;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    padding: 40px 95px;
     text-align: center;
+    width: 600px;
     box-shadow: 10px 10px 10px black;
   }
-  #width40{
-    width: 40%;
-    color: rgb(255, 255, 255);
+
+  #host{
+    background-color: #e83333;
+    border-radius: 6px;
+    padding:5px;
+    width: 120px;
+    color: white;
+    font-size: 120%;
+    margin-bottom: 25px;
   }
-  .width50{
-    width: 48%;
-    height: 90px;
-    border-radius: 10px;
-    display: inline-block;
-    text-align: center;
-    vertical-align: top;
-  }
-  
-  .width50 p{
-    height: 90px;
-    border-radius: 10px;
-    vertical-align: top;
-  }
-  
-  @media (max-width: 576px) {
-    .box {
-        margin-top: -150px;
-        display: inline-table;
-      vertical-align: top;
-      padding: 40px 12px;
-      justify-content: space-between;
-    }
-    .width50{
-        width: 48%;
-        height: 136px;
-        border-radius: 10px;
-        display: inline-block;
-        text-align: center;
-        vertical-align: top;
-    }
-    
-    .width50 p{
-        height: 143px;
-        border-radius: 10px;
-        vertical-align: top;
-    }
-  }
-  
-  @media (max-width: 768px) {
-    .wrap-login100 {
-        margin-top: -150px;
-        display: inline-table;
-      vertical-align: top;
-      padding: 40px 8px;
-      justify-content: space-between;
-      height: 380px;
-    }
-  
-    .width50{
-        width: 48%;
-        height: 136px;
-        border-radius: 10px;
-        display: inline-block;
-        text-align: center;
-        vertical-align: top;
-    }
-  
-    .width50 p{
-        height: 143px;
-        border-radius: 10px;
-        vertical-align: top;
-    }
+  #player{
+    background-color: #e2b22d;
+    border-radius: 6px;
+    padding:5px;
+    width: 120px;
+    color: black;
+    font-size: 120%;
+    margin-bottom: 25px;
+    margin-left: 30px;
   }
