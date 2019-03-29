@@ -8,6 +8,7 @@
     animation-name: slidein;
     animation-duration: 2s;
     z-index: 0;
+    word-wrap: break-word;
     
 }
 .div2{
