@@ -47,11 +47,12 @@
     </div>
 
     <div class="div2" style="display:none;">
-        <h4>Are you ready for the next step!!!!</h4>
+        <h4>Are you ready for next question?</h4>
+        <img id="logo" src="~/images/dog1.gif" alt="IMG">
         <form asp-action="LoadNextQuestion" method="post" asp-controller="Home">
             <input type="hidden" name="currentquestionID" value="@ViewBag.question.QuestionID">
             <input type="hidden" name="roomID" value="@ViewBag.RoomID">
-            <button type="submit" class="btn btn-primary rightbt">Let Continue!!!</button>
+            <button type="submit" class="btn btn-primary rightbt">Continue!</button>
         </form>
     </div>
 
