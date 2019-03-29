@@ -280,17 +280,17 @@ namespace offyesproj.Controllers
         {
             var thisquestion = dbContext.Questions.FirstOrDefault(a => a.QuestionID == questionid);
             ViewBag.question = thisquestion;
-            int loadtimer = thisquestion.Timer * 1000;
+            int loadtimer = thisquestion.Timerplayer * 1000;
             ViewBag.LoadTimer = loadtimer;
-            if (thisquestion.Timer == 10)
+            if (thisquestion.Timerplayer == 10)
             {
                 ViewBag.timer = "/music/10.mp3";
             }
-            if (thisquestion.Timer == 15)
+            if (thisquestion.Timerplayer == 15)
             {
                 ViewBag.timer = "/music/15.mp3";
             }
-            if (thisquestion.Timer == 20)
+            if (thisquestion.Timerplayer == 20)
             {
                 ViewBag.timer = "/music/20.mp3";
             }
